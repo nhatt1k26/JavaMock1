@@ -3,9 +3,7 @@ package nhat.fpt.Mock1.controller;
 import nhat.fpt.Mock1.model.dto.BookingOfficeDTO;
 import nhat.fpt.Mock1.model.response.BookingOfficeResponse;
 import nhat.fpt.Mock1.service.BookingOfficeService;
-import nhat.fpt.Mock1.service.BookingOfficeServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +16,8 @@ public class BookingOfficeController {
         this.bookingOfficeService=bookingOfficeService;
     }
     @GetMapping("/all")
-    public ResponseEntity<List<BookingOfficeResponse>> findAllBookingOffice(){
-        return ResponseEntity.ok(bookingOfficeService.findAll());
+    public List<BookingOfficeResponse> findAllBookingOffice(){
+        return bookingOfficeService.findAll();
     }
     @GetMapping("/{id}")
     public ResponseEntity<BookingOfficeResponse> findOffice(
@@ -36,13 +34,10 @@ public class BookingOfficeController {
         bookingOfficeService.addBookingOffice(newOffice);
         return ResponseEntity.ok("Add office successful");
     }
-
-
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateById(
             @PathVariable Long id,
-            @RequestBody BookingOfficeDTO updateBookingOffice
-    )
+            @RequestBody BookingOfficeDTO updateBookingOffice)
     {
         bookingOfficeService.updateBookingOffice(id,updateBookingOffice);
         return ResponseEntity.ok("Update succesfful");

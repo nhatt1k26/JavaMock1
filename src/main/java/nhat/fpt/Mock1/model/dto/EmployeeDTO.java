@@ -1,9 +1,9 @@
 package nhat.fpt.Mock1.model.dto;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import java.util.Date;
 
 @Getter
@@ -15,6 +15,7 @@ public class EmployeeDTO {
     private String sex;
     private String employeeAddress;
     @JsonFormat(pattern= "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")
+
     private String employeeEmail;
 
     private String account;
