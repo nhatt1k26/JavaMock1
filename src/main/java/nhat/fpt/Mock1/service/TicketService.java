@@ -7,6 +7,7 @@ import nhat.fpt.Mock1.model.response.TicketResponse;
 import java.util.List;
 
 public interface TicketService {
+    boolean isEmpty();
     List<TicketResponse> findAll();
     TicketResponse findById(Long id);
     void addTicket(TicketDTO e);

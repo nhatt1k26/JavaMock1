@@ -8,6 +8,7 @@ import nhat.fpt.Mock1.utilities.CustomPage;
 import java.util.List;
 
 public interface ParkingLotService {
+    boolean isEmpty();
     List<ParkingLotResponse> findAll();
     ParkingLotResponse findById(Long id);
     void addParkingLot(ParkingLotDTO e);

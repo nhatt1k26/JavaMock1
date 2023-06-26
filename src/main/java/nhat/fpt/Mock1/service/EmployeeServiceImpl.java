@@ -14,6 +14,10 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService{
     private final EmployeeRepository employeeRepository;
     private final ModelMapper modelMapper;
+    @Override
+    public boolean isEmpty(){
+        return !employeeRepository.findAll().isEmpty();
+    }
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, ModelMapper modelMapper) {
         this.employeeRepository = employeeRepository;

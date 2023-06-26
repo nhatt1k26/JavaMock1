@@ -6,6 +6,7 @@ import nhat.fpt.Mock1.model.response.BookingOfficeResponse;
 import java.util.List;
 
 public interface BookingOfficeService{
+    boolean isEmpty();
     List<BookingOfficeResponse> findAll();
     BookingOfficeResponse findById(Long id);
     BookingOfficeResponse addBookingOffice(BookingOfficeDTO newElement);

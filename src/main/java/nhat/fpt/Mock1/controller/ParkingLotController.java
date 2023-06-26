@@ -4,6 +4,7 @@ import nhat.fpt.Mock1.model.dto.ParkingLotDTO;
 import nhat.fpt.Mock1.model.response.ParkingLotResponse;
 import nhat.fpt.Mock1.service.ParkingLotService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,8 @@ public class ParkingLotController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ParkingLotResponse>> findAllParking(){
+        if (parkingLotService.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return ResponseEntity.ok(parkingLotService.findAll());
     }
 

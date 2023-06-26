@@ -7,6 +7,7 @@ import nhat.fpt.Mock1.utilities.CustomPage;
 
 import java.util.List;
 public interface EmployeeService {
+    boolean isEmpty();
     List<EmployeeResponse> findAll();
     EmployeeResponse findById(Long id);
     void addEmployee(EmployeeDTO e);

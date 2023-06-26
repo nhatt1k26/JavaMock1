@@ -6,6 +6,7 @@ import nhat.fpt.Mock1.model.response.TicketResponse;
 import nhat.fpt.Mock1.repository.TicketRepository;
 import nhat.fpt.Mock1.service.TicketService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,7 @@ public class TicketController {
     )
     {
         ticketService.addTicket(newTicket);
-        return ResponseEntity.ok("Add new employee successful");
+        return new ResponseEntity<>("Add new employee successful", HttpStatus.CREATED);
     }
 
     @PutMapping("/updateTicket/{id}")

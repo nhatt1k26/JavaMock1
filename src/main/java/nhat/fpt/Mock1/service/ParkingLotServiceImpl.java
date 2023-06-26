@@ -19,6 +19,10 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         this.parkingLotRepository = parkingLotRepository;
         this.modelMapper = modelMapper;
     }
+    @Override
+    public boolean isEmpty(){
+        return !parkingLotRepository.findAll().isEmpty();
+    }
 
     @Override
     public List<ParkingLotResponse> findAll(){

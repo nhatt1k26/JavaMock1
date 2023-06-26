@@ -19,6 +19,10 @@ public class CarServiceImpl implements CarService{
         this.carRepository = carRepository;
         this.modelMapper = modelMapper;
     }
+    @Override
+    public boolean isEmpty(){
+        return !carRepository.findAll().isEmpty();
+    }
 
     @Override
     public List<CarResponse> findAll(){

@@ -1,6 +1,7 @@
 package nhat.fpt.Mock1.service;
 
 import nhat.fpt.Mock1.exception.EntityNotFoundException;
+import nhat.fpt.Mock1.exception.FKMapNotExistException;
 import nhat.fpt.Mock1.model.dto.BookingOfficeDTO;
 import nhat.fpt.Mock1.model.entity.BookingOffice;
 import nhat.fpt.Mock1.model.entity.Trip;
@@ -24,6 +25,10 @@ public class BookingOfficeServiceImpl implements BookingOfficeService{
         this.tripRepository = tripRepository;
         this.modelMapper = modelMapper;
     }
+    @Override
+    public boolean isEmpty(){
+        return !bookingOfficeRepository.findAll().isEmpty();
+    }
 
     @Override
     public List<BookingOfficeResponse> findAll(){
@@ -40,7 +45,7 @@ public class BookingOfficeServiceImpl implements BookingOfficeService{
     public BookingOfficeResponse addBookingOffice(BookingOfficeDTO bookingOfficeDTO){
         Long tripId = bookingOfficeDTO.getTripId();
         Trip trip = modelMapper.map(tripRepository.findById(tripId).orElseThrow(()->{
-            throw new EntityNotFoundException("Trip with id = " + tripId + "not exists");
+            throw new FKMapNotExistException("Trip with id = " + tripId + "not exists");
         }),Trip.class);
         BookingOffice bookingOfficeToAdd = modelMapper.map(bookingOfficeDTO,BookingOffice.class);
         bookingOfficeToAdd.setOfficeId(null);

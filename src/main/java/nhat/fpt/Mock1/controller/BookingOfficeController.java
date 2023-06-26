@@ -1,11 +1,10 @@
 package nhat.fpt.Mock1.controller;
-
 import nhat.fpt.Mock1.model.dto.BookingOfficeDTO;
 import nhat.fpt.Mock1.model.response.BookingOfficeResponse;
 import nhat.fpt.Mock1.service.BookingOfficeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -16,14 +15,16 @@ public class BookingOfficeController {
         this.bookingOfficeService=bookingOfficeService;
     }
     @GetMapping("/all")
-    public List<BookingOfficeResponse> findAllBookingOffice(){
-        return bookingOfficeService.findAll();
+    public ResponseEntity<List<BookingOfficeResponse>> findAllBookingOffice(){
+        if (bookingOfficeService.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(bookingOfficeService.findAll(), HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<BookingOfficeResponse> findOffice(
             @PathVariable Long id
     ){
-        return ResponseEntity.ok(bookingOfficeService.findById(id));
+        return new ResponseEntity<>(bookingOfficeService.findById(id),HttpStatus.OK);
     }
 
     @PostMapping("/addOffice")
@@ -32,7 +33,7 @@ public class BookingOfficeController {
     )
     {
         bookingOfficeService.addBookingOffice(newOffice);
-        return ResponseEntity.ok("Add office successful");
+        return new ResponseEntity<>("Add office successful", HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateById(
@@ -40,7 +41,7 @@ public class BookingOfficeController {
             @RequestBody BookingOfficeDTO updateBookingOffice)
     {
         bookingOfficeService.updateBookingOffice(id,updateBookingOffice);
-        return ResponseEntity.ok("Update succesfful");
+        return new ResponseEntity<>("Update succesfful",HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -49,6 +50,6 @@ public class BookingOfficeController {
     )
     {
         bookingOfficeService.deleteBookingOffice(id);
-        return ResponseEntity.ok("Deleted book trip!");
+        return new ResponseEntity<>("Deleted book trip!",HttpStatus.OK);
     }
 }

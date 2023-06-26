@@ -6,6 +6,7 @@ import nhat.fpt.Mock1.model.response.EmployeeResponse;
 import nhat.fpt.Mock1.repository.EmployeeRepository;
 import nhat.fpt.Mock1.service.EmployeeService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,8 @@ public class EmployeeController {
 
     @GetMapping("/all")
     public ResponseEntity<List<EmployeeResponse>> findAllEmployee(){
+        if (employeeService.isEmpty())
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return ResponseEntity.ok(employeeService.findAll());
     }
 

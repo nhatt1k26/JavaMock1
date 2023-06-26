@@ -21,6 +21,10 @@ public class TripServiceImpl implements TripService{
         this.modelMapper = modelMapper;
     }
     @Override
+    public boolean isEmpty(){
+        return !tripRepository.findAll().isEmpty();
+    }
+    @Override
     public List<TripResponse> findAll(){
         List<TripResponse> tripList = tripRepository.findAll().stream().map(s->modelMapper.map(s,TripResponse.class)).collect(Collectors.toList());
         return tripList;

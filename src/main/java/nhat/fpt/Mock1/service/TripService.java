@@ -6,6 +6,7 @@ import nhat.fpt.Mock1.model.response.TripResponse;
 import java.util.List;
 
 public interface TripService {
+    boolean isEmpty();
     List<TripResponse> findAll();
     TripResponse findById(Long id);
     TripResponse addTrip(TripDTO e);

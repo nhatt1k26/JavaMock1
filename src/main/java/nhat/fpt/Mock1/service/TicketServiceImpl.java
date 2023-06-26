@@ -1,6 +1,7 @@
 package nhat.fpt.Mock1.service;
 
 import nhat.fpt.Mock1.exception.EntityNotFoundException;
+import nhat.fpt.Mock1.exception.FKMapNotExistException;
 import nhat.fpt.Mock1.model.dto.TicketDTO;
 import nhat.fpt.Mock1.model.entity.Ticket;
 import nhat.fpt.Mock1.model.response.TicketResponse;
@@ -25,6 +26,10 @@ public class TicketServiceImpl implements TicketService{
         this.tripRepository = tripRepository;
         this.modelMapper = modelMapper;
     }
+    @Override
+    public boolean isEmpty(){
+        return !ticketRepository.findAll().isEmpty();
+    }
 
     @Override
     public List<TicketResponse> findAll(){
@@ -43,10 +48,10 @@ public class TicketServiceImpl implements TicketService{
         String licensePlate = e.getLicensePlate();
         Long tripId = e.getTripId();
         carRepository.findByLicensePlate(licensePlate).orElseThrow(()->{
-            throw new EntityNotFoundException("Not exists car with licensePlate: "+licensePlate);
+            throw new FKMapNotExistException("Not exists car with licensePlate: "+licensePlate);
         });
         tripRepository.findByTripId(tripId).orElseThrow(()->{
-            throw new EntityNotFoundException("Not exists trip with tripId: "+tripId);
+            throw new FKMapNotExistException("Not exists trip with tripId: "+tripId);
         });
         ticketRepository.save(modelMapper.map(e,Ticket.class));
     }

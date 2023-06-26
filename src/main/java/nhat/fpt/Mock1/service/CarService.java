@@ -10,6 +10,7 @@ import nhat.fpt.Mock1.utilities.CustomPage;
 import java.util.List;
 
 public interface CarService {
+    boolean isEmpty();
     List<CarResponse> findAll();
     CarResponse findById(String id);
     void addCar(CarDTO e);

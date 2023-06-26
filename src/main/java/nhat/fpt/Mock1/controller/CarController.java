@@ -6,6 +6,7 @@ import nhat.fpt.Mock1.model.response.CarResponse;
 import nhat.fpt.Mock1.service.CarService;
 import nhat.fpt.Mock1.service.CarService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +39,7 @@ public class CarController {
     )
     {
         carService.addCar(newCar);
-        return ResponseEntity.ok("Add new employee successful");
+        return new ResponseEntity("Add new employee successful", HttpStatus.CREATED);
     }
 
     @PutMapping("/updateCar/{id}")

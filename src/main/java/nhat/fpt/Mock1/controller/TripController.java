@@ -8,6 +8,7 @@ import nhat.fpt.Mock1.model.response.TripResponse;
 import nhat.fpt.Mock1.repository.TripRepository;
 import nhat.fpt.Mock1.service.BookingOfficeService;
 import nhat.fpt.Mock1.service.TripService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +39,7 @@ public class TripController {
             @RequestBody TripDTO updateTripDTO)
     {
         tripService.addTrip(updateTripDTO);
-        return ResponseEntity.ok("Add new trip successful");
+        return new ResponseEntity<>("Add new trip successful", HttpStatus.CREATED);
     }
 
     @PutMapping("/updateTrip/{id}")
